@@ -17,14 +17,11 @@ export class CategoryService {
             user: { id },
             title: createCategoryDto.title
         })
-
         if (isExist.length) throw new BadRequestException('This category already exist!')
-
         const newCategory = {
             title: createCategoryDto.title,
             user: { id }
         }
-
         return await this.categoryRepository.save(newCategory);
     }
 
@@ -47,25 +44,19 @@ export class CategoryService {
                 transactions: true
             }
         })
-
         if (!category) throw new NotFoundException('Category not found!')
-
         return category
     }
 
     async aupdate(id: number, updateCategoryDto: UpdateCategoryDto) {
         const category = await this.categoryRepository.findOne({ where: { id } })
-
         if (!category) throw new NotFoundException('Category not found!')
-
         return await this.categoryRepository.update(id, updateCategoryDto)
     }
 
     async remove(id: number) {
         const category = await this.categoryRepository.findOne({ where: { id } })
-
         if (!category) throw new NotFoundException('Category not found!')
-
         return await this.categoryRepository.delete(id)
     }
 }

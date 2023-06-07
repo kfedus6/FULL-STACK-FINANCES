@@ -14,7 +14,6 @@ export class AuthService {
     async validateUser(email: string, password: string) {
         const user = await this.userService.findOne(email)
         const passwordIsMatch = await agron2.verify(user.password, password)
-
         if (user && passwordIsMatch) {
             return user
         }

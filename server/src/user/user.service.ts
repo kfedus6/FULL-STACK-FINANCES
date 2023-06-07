@@ -15,17 +15,12 @@ export class UserService {
 
     async create(createUserDto: CreateUserDto) {
         const existUser = await this.userRepository.findOne({ where: { email: createUserDto.email } })
-
         if (existUser) throw new BadRequestException('This email already exist!')
-
-
         const user = await this.userRepository.save({
             email: createUserDto.email,
             password: await agron2.hash(createUserDto.password),
         })
-
         const token = this.jwtService.sign({ email: createUserDto.email })
-
         return { user, token };
     }
 

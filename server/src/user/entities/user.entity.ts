@@ -17,7 +17,7 @@ export class User {
     categories: Category[];
 
     @OneToMany(() => Transaction, (transaction) => transaction.user, { onDelete: 'CASCADE' })
-    transactions: Transaction[]
+    transactions: Transaction[];
 
     @CreateDateColumn()
     createdAt: Date;
