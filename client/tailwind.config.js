@@ -7,7 +7,7 @@ export default {
     theme: {
         container: {
             padding: '2rem',
-            content: true
+            center: true
         },
         extend: {
             fontFamily: {

@@ -1,11 +1,21 @@
 import { FC } from 'react'
-import { Link, NavLink } from 'react-router-dom'
+import { Link, NavLink, useNavigate } from 'react-router-dom'
 import { FaBtc, FaSignOutAlt } from 'react-icons/fa'
-import { useAppSelector } from '../hooks/redux'
+import { useAppDispatch, useAppSelector } from '../hooks/redux'
 import { UserState } from '../store/reducers/UserSlice'
+import { fetchLogout } from '../store/reducers/ActionCreators'
 
 const Header: FC = () => {
     const { isAuth }: UserState = useAppSelector(state => state.user)
+
+    const dispatch = useAppDispatch()
+
+    const navigate = useNavigate()
+
+    const logout = () => {
+        dispatch(fetchLogout())
+        navigate('/')
+    }
 
     return (
         <header className='flex items-center bg-slate-800 p-4 shadow-sm backdrop-blur-sm'>
@@ -14,7 +24,7 @@ const Header: FC = () => {
                     <FaBtc size={30} />
                 </span>
             </Link>
-            {!isAuth
+            {isAuth
                 ?
                 <nav className='ml-auto mr-10'>
                     <ul className='flex items-center gap-5'>
@@ -27,7 +37,7 @@ const Header: FC = () => {
                         <li>
                             <NavLink to={'/categories'}>Categories</NavLink>
                         </li>
-                        <button className='btn btn-red'>
+                        <button className='btn btn-red' onClick={logout}>
                             <span>Log Out</span>
                             <FaSignOutAlt />
                         </button>

@@ -3,7 +3,7 @@ import { IUser } from "../../types/types";
 
 export interface UserState {
     user: IUser[]
-    isAuth: boolean
+    isAuth: boolean,
 }
 
 const initialState: UserState = {
