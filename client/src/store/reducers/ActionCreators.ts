@@ -8,7 +8,6 @@ import { toast } from "react-toastify";
 export const fetchRegistration = (userData: IUser) => async (dispatch: AppDispatch) => {
     try {
         const response = await $host.post('user', userData)
-        console.log(response)
         if (response.status === 201) {
             localforage.setItem('token', response.data.token)
             dispatch(userSlice.actions.registration({ user: response.data.user, isAuth: true }))
@@ -27,18 +26,23 @@ export const fetchRegistration = (userData: IUser) => async (dispatch: AppDispat
 export const fetchLogin = (userData: IUser) => async (dispatch: AppDispatch) => {
     try {
         const response = await $host.post('auth/login', userData)
-        localforage.setItem('token', response.data.token)
-        dispatch(userSlice.actions.registration({ user: response.data.user, isAuth: true }))
-    } catch (error: any) {
-        console.log(error)
+        if (response.status === 201) {
+            localforage.setItem('token', response.data.token)
+            dispatch(userSlice.actions.registration({ user: response.data.user, isAuth: true }))
+            toast.success('You are account in.')
+        }
+    } catch (err: any) {
+        if (Array.isArray(err.response.data.message)) {
+            toast.error(err.response.data.message[0])
+            toast.error(err.response.data.message[1])
+        } else {
+            toast.error(err.response.data.message)
+        }
     }
 }
 
 export const fetchLogout = () => async (dispatch: AppDispatch) => {
-    try {
-        localforage.removeItem('token')
-        dispatch(userSlice.actions.registration({ user: [], isAuth: false }))
-    } catch (error: any) {
-        console.log(error)
-    }
+    localforage.removeItem('token')
+    dispatch(userSlice.actions.registration({ user: [], isAuth: false }))
+    toast.success('You extid in account.')
 }

@@ -1,6 +1,6 @@
-import { FC, useState } from "react"
+import { FC, useEffect, useState } from "react"
 import { IUser } from "../types/types"
-import { useAppDispatch } from "../hooks/redux"
+import { useAppDispatch, useAppSelector } from "../hooks/redux"
 import { fetchLogin, fetchRegistration } from "../store/reducers/ActionCreators"
 import { useNavigate } from "react-router-dom"
 
@@ -9,18 +9,24 @@ const Auth: FC = () => {
     const [password, setPassword] = useState<string>('')
     const [isLogin, setIsLogin] = useState<boolean>(false)
 
+    const { isAuth }: any = useAppSelector(state => state.user)
+
     const dispatch = useAppDispatch()
 
     const navigate = useNavigate()
+
+    useEffect(() => {
+        if (isAuth) {
+            navigate('/')
+        }
+    }, [isAuth])
 
     const registrationOrLogin = () => {
         const userData: IUser = { email, password }
         if (isLogin) {
             dispatch(fetchLogin(userData))
-            navigate('/')
         } else {
             dispatch(fetchRegistration(userData))
-            navigate('/')
         }
     }
 
