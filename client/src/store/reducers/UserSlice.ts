@@ -23,6 +23,10 @@ export const userSlice = createSlice({
             state.user = action.payload.user
             state.isAuth = action.payload.isAuth
         },
+        profile(state, action: PayloadAction<UserState>) {
+            state.user = action.payload.user
+            state.isAuth = action.payload.isAuth
+        },
         logout(state, action: PayloadAction<UserState>) {
             state.user = action.payload.user
             state.isAuth = action.payload.isAuth

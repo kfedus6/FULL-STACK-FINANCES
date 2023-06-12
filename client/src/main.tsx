@@ -11,6 +11,6 @@ const store = setupStore()
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
     <Provider store={store}>
         <App />
-        <ToastContainer position='bottom-left' autoClose={3000} />
+        <ToastContainer position='bottom-left' autoClose={2000} />
     </Provider>
 )
