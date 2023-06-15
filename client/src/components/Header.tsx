@@ -1,6 +1,6 @@
 import { FC } from 'react'
 import { Link, NavLink, useNavigate } from 'react-router-dom'
-import { FaBtc, FaSignOutAlt } from 'react-icons/fa'
+import { FaSignOutAlt, FaDollarSign } from 'react-icons/fa'
 import { useAppDispatch, useAppSelector } from '../hooks/redux'
 import { UserState } from '../store/reducers/UserSlice'
 import { fetchLogout } from '../store/reducers/ActionCreators'
@@ -21,7 +21,7 @@ const Header: FC = () => {
         <header className='flex items-center bg-slate-800 p-4 shadow-sm backdrop-blur-sm'>
             <Link to='/'>
                 <span>
-                    <FaBtc size={30} />
+                    <FaDollarSign size={30} />
                 </span>
             </Link>
             {isAuth
