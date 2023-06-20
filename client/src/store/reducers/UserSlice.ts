@@ -2,7 +2,7 @@ import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 import { IUser } from "../../types/types";
 
 export interface UserState {
-    user: IUser[]
+    user: IUser[],
     isAuth: boolean,
 }
 

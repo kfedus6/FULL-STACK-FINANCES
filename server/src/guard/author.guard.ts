@@ -18,7 +18,7 @@ export class AuthorGuard implements CanActivate {
                 entity = await this.transactionService.findOne(id)
                 break;
             case 'category':
-                entity = await this.transactionService.findOne(id)
+                entity = await this.categoryService.findOne(id)
                 break;
             default:
                 throw new NotFoundException('Something went wrong...')

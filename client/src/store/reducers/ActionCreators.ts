@@ -1,9 +1,11 @@
-import { $host } from "../../http";
+import { $host, $authHost } from "../../http";
 import { IUser } from "../../types/types";
 import { AppDispatch } from "../store";
+import { categorySlice } from "./CategorySlice";
 import { userSlice } from "./UserSlice";
 import { toast } from "react-toastify";
 
+/*User Action*/
 export const fetchRegistration = (userData: IUser) => async (dispatch: AppDispatch) => {
     try {
         const response = await $host.post('user', userData)
@@ -54,3 +56,53 @@ export const fetchLogout = () => async (dispatch: AppDispatch) => {
     dispatch(userSlice.actions.registration({ user: [], isAuth: false }))
     toast.success('You logged out!')
 }
+
+/*Category Action*/
+
+export const fetchCreateAndUpdateCategory = (type: string, title: string, id: number) => async (dispatch: AppDispatch) => {
+    switch (type) {
+        case 'post': {
+            const response = await $authHost.post('categories', { title })
+            dispatch(categorySlice.actions.createCategory({ categories: response.data }))
+            toast.success('You have created a category!')
+            break
+        }
+        case 'patch': {
+            const response = await $authHost.patch(`categories/category/${id}`, { title })
+            dispatch(categorySlice.actions.updateCategory({ categories: response.data }))
+            toast.success('You have updated a category!')
+            break
+        }
+        default: {
+            break
+        }
+    }
+    // try {
+    //     const response = await $authHost.post('categories', { title })
+    //     dispatch(categorySlice.actions.createCategory({ categories: response.data }))
+    //     toast.success('You have created a category!')
+    // } catch (err: any) {
+    //     toast.error(err.response.data.message[0])
+    // }
+}
+
+export const fetchFindAllCategories = () => async (dispatch: AppDispatch) => {
+    try {
+        const response = await $authHost.get('categories')
+        dispatch(categorySlice.actions.findAllCaegories({ categories: response.data }))
+    } catch (err: any) {
+        console.log(err)
+    }
+}
+
+export const deleteCategoryId = (id: number) => async (dispatch: AppDispatch) => {
+    try {
+        const response = await $authHost.delete(`categories/category/${id}`)
+        dispatch(categorySlice.actions.deleteCaegoryId({ categories: response.data }))
+        toast.success('You have deleted the category!')
+    } catch (err: any) {
+        console.log(err)
+    }
+}
+
+

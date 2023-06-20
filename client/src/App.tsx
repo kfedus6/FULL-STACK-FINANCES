@@ -1,8 +1,8 @@
-import { RouterProvider } from "react-router-dom"
-import { router } from "./router/router"
+import { BrowserRouter } from "react-router-dom"
 import { useAppDispatch } from "./hooks/redux"
 import { fetchProfile } from "./store/reducers/ActionCreators"
 import { useEffect } from "react"
+import AppRouter from "./components/AppRouter"
 
 const App = () => {
     const dispatch = useAppDispatch()
@@ -18,7 +18,11 @@ const App = () => {
         checkAuth()
     }, [])
 
-    return <RouterProvider router={router} />
+    return (
+        <BrowserRouter>
+            <AppRouter />
+        </BrowserRouter>
+    )
 }
 
 export default App

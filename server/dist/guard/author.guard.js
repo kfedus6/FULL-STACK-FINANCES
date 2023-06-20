@@ -27,7 +27,7 @@ let AuthorGuard = exports.AuthorGuard = class AuthorGuard {
                 entity = await this.transactionService.findOne(id);
                 break;
             case 'category':
-                entity = await this.transactionService.findOne(id);
+                entity = await this.categoryService.findOne(id);
                 break;
             default:
                 throw new common_1.NotFoundException('Something went wrong...');

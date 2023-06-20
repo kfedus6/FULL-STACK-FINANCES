@@ -39,7 +39,7 @@ __decorate([
 __decorate([
     (0, typeorm_1.UpdateDateColumn)(),
     __metadata("design:type", Date)
-], Category.prototype, "updateAt", void 0);
+], Category.prototype, "updatedAt", void 0);
 exports.Category = Category = __decorate([
     (0, typeorm_1.Entity)()
 ], Category);

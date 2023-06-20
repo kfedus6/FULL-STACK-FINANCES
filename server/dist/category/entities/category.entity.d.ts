@@ -6,5 +6,5 @@ export declare class Category {
     user: User;
     transactions: Transaction[];
     createdAt: Date;
-    updateAt: Date;
+    updatedAt: Date;
 }
