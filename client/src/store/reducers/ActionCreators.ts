@@ -2,10 +2,11 @@ import { $host, $authHost } from "../../http";
 import { IUser } from "../../types/types";
 import { AppDispatch } from "../store";
 import { categorySlice } from "./CategorySlice";
+import { transactionSlice } from "./TransactionSlice";
 import { userSlice } from "./UserSlice";
 import { toast } from "react-toastify";
 
-/*User Action*/
+//User Action
 export const fetchRegistration = (userData: IUser) => async (dispatch: AppDispatch) => {
     try {
         const response = await $host.post('user', userData)
@@ -57,7 +58,7 @@ export const fetchLogout = () => async (dispatch: AppDispatch) => {
     toast.success('You logged out!')
 }
 
-/*Category Action*/
+//Category Action
 
 export const fetchCreateAndUpdateCategory = (type: string, title: string, id: number) => async (dispatch: AppDispatch) => {
     switch (type) {
@@ -77,13 +78,6 @@ export const fetchCreateAndUpdateCategory = (type: string, title: string, id: nu
             break
         }
     }
-    // try {
-    //     const response = await $authHost.post('categories', { title })
-    //     dispatch(categorySlice.actions.createCategory({ categories: response.data }))
-    //     toast.success('You have created a category!')
-    // } catch (err: any) {
-    //     toast.error(err.response.data.message[0])
-    // }
 }
 
 export const fetchFindAllCategories = () => async (dispatch: AppDispatch) => {
@@ -91,7 +85,7 @@ export const fetchFindAllCategories = () => async (dispatch: AppDispatch) => {
         const response = await $authHost.get('categories')
         dispatch(categorySlice.actions.findAllCaegories({ categories: response.data }))
     } catch (err: any) {
-        console.log(err)
+        toast.error(err.response.data.message)
     }
 }
 
@@ -101,8 +95,27 @@ export const deleteCategoryId = (id: number) => async (dispatch: AppDispatch) =>
         dispatch(categorySlice.actions.deleteCaegoryId({ categories: response.data }))
         toast.success('You have deleted the category!')
     } catch (err: any) {
-        console.log(err)
+        toast.error(err.response.data.message)
     }
 }
 
+//Transaction Action
 
+export const fetchCreateTransaction = (data: any) => async (dispatch: AppDispatch) => {
+    try {
+        const response = await $authHost.post('transactions', data)
+        dispatch(transactionSlice.actions.createTransaction({ transactions: response.data }))
+        toast.success('You have created a transaction!')
+    } catch (err: any) {
+        toast.error(err.response.data.message)
+    }
+}
+
+export const fetchFindAllTransactions = () => async (dispatch: AppDispatch) => {
+    try {
+        const response = await $authHost.get('transactions')
+        dispatch(transactionSlice.actions.findAllTransactions({ transactions: response.data }))
+    } catch (err: any) {
+        toast.error(err.response.data.message)
+    }
+}

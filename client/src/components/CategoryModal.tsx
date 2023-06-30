@@ -20,10 +20,11 @@ const CategoryModal: FC<ICategoryModal> = ({ type, id, setVisibleModal }) => {
 
     return (
         <div className='fixed top-0 left-0 bottom-0 right-0 w-full h-full bg-black/50 flex justify-center items-center'>
-            <div className='grid gap-2 w-[300px] rounded-md bg-slate-900 p-5'>
+            <div className='grid gap-4 w-[300px] rounded-md bg-slate-900 p-5'>
                 <label htmlFor='title'>
                     <span>Category Title</span>
-                    <input className='input w-full'
+                    <input
+                        className='input w-full cursor-default'
                         type="text"
                         name='title'
                         placeholder='Title...'
