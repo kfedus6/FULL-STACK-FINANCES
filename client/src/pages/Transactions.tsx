@@ -1,8 +1,20 @@
-import { FC } from "react"
+import { FC, useEffect } from "react"
 import TransactionForm from "../components/TransactionForm"
 import TransactionTable from "../components/TransactionTable"
+import { useAppDispatch, useAppSelector } from "../hooks/redux"
+import { fetchIncomeAndExpenseTransactions } from "../store/reducers/ActionCreators"
+import { TransactionState } from "../store/reducers/TransactionSlice"
+import { formatUSD } from "../helpers/currency.helper"
+import Chart from "../components/Chart"
 
 const Transactions: FC = () => {
+
+    const dispatch = useAppDispatch()
+    const { totalIncome, totalExpense }: TransactionState = useAppSelector(state => state.transaction)
+
+    useEffect(() => {
+        dispatch(fetchIncomeAndExpenseTransactions())
+    }, [])
     return (
         <>
             <div className="grid grid-cols-3 gap-4 mt-4 items-start">
@@ -13,13 +25,14 @@ const Transactions: FC = () => {
                     <div className="grid grid-cols-2 gap-3">
                         <div className="cursor-default">
                             <p className="uppercase text-md text-center font-bold">Total Income:</p>
-                            <p className="mt-2 rounded-sm bg-green-600 p-1 text-center">1000$</p>
+                            <p className="mt-2 rounded-sm bg-green-600 p-1 text-center">{formatUSD.format(totalIncome)}</p>
                         </div>
                         <div className="cursor-default">
                             <p className="uppercase text-md text-center font-bold">Total Expense:</p>
-                            <p className="mt-2 rounded-sm bg-red-500 p-1 text-center">1000$</p>
+                            <p className="mt-2 rounded-sm bg-red-500 p-1 text-center">{formatUSD.format(totalExpense)}</p>
                         </div>
                     </div>
+                    <Chart totalIncome={totalIncome} totalExpense={totalExpense} />
                 </div>
             </div>
             <h1 className="my-5">

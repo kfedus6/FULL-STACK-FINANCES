@@ -104,7 +104,7 @@ export const deleteCategoryId = (id: number) => async (dispatch: AppDispatch) =>
 export const fetchCreateTransaction = (data: any) => async (dispatch: AppDispatch) => {
     try {
         const response = await $authHost.post('transactions', data)
-        dispatch(transactionSlice.actions.createTransaction({ transactions: response.data }))
+        dispatch(transactionSlice.actions.createTransaction({ transactions: response.data, transactionsPagination: [], totalExpense: 0, totalIncome: 0 }))
         toast.success('You have created a transaction!')
     } catch (err: any) {
         toast.error(err.response.data.message)
@@ -114,7 +114,36 @@ export const fetchCreateTransaction = (data: any) => async (dispatch: AppDispatc
 export const fetchFindAllTransactions = () => async (dispatch: AppDispatch) => {
     try {
         const response = await $authHost.get('transactions')
-        dispatch(transactionSlice.actions.findAllTransactions({ transactions: response.data }))
+        dispatch(transactionSlice.actions.findAllTransactions({ transactions: response.data, transactionsPagination: [], totalExpense: 0, totalIncome: 0 }))
+    } catch (err: any) {
+        toast.error(err.response.data.message)
+    }
+}
+
+export const fetchFindAllPaginationTransactions = (page: number, limit: number) => async (dispatch: AppDispatch) => {
+    try {
+        const response = await $authHost.get(`transactions/pagination?page=${page}&limit=${limit}`)
+        dispatch(transactionSlice.actions.findAllPaginationTransactions({ transactions: [], transactionsPagination: response.data, totalExpense: 0, totalIncome: 0 }))
+    } catch (err: any) {
+        toast.error(err.response.data.message)
+    }
+}
+
+export const fetchIncomeAndExpenseTransactions = () => async (dispatch: AppDispatch) => {
+    try {
+        const responseIncome = await $authHost.get('transactions/income/find')
+        const responseExpense = await $authHost.get('transactions/expense/find')
+        dispatch(transactionSlice.actions.findIncomeAndExpenseTransactions({ transactions: [], transactionsPagination: [], totalExpense: responseExpense.data, totalIncome: responseIncome.data }))
+    } catch (err: any) {
+        toast.error(err.response.data.message)
+    }
+}
+
+export const fetchDeleteTransaction = (id: any) => async (dispatch: AppDispatch) => {
+    try {
+        const response = await $authHost.delete(`transactions/transaction/${id}`)
+        dispatch(transactionSlice.actions.deleteTransaction({ transactions: response.data, transactionsPagination: [], totalExpense: 0, totalIncome: 0 }))
+        toast.success('You have deleted the transaction!')
     } catch (err: any) {
         toast.error(err.response.data.message)
     }
