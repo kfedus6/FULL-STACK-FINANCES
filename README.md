@@ -2,7 +2,7 @@
 
 <div align="center">
    
-  <img src="/README/nestjs.png" alt="Logo" width="200px"/>
+  <img src="/README/nestjs.png" alt="Logo" width="500px"/>
    
   <h1 align="center">This is my NodeJS+NestJS+React project.</h1>
   <p style="font-size: 25px;"><strong>FINANCE</strong></p>
@@ -47,13 +47,13 @@
 <p style="font-size: 25px;"><strong>- Some photos of the project.</strong></p>
 
 <div  style="display:flex;justify-content: space-around;align-items: center">
-  <img src="/README/finance.png" alt="finance" width="300px"/>
-  <img src="/README/finance1.png" alt="finance" width="300px"/>
-  <img src="/README/finance2.png" alt="finance" width="300px"/>
-  <img src="/README/finance3.png" alt="finance" width="300px"/>
-  <img src="/README/finance4.png" alt="finance" width="300px"/>
-  <img src="/README/finance5.png" alt="finance" width="300px"/>
-  <img src="/README/finance6.png" alt="finance" width="300px"/>
+  <img src="/README/finance.png" alt="finance" width="400px"/>
+  <img src="/README/finance1.png" alt="finance" width="400px"/>
+  <img src="/README/finance2.png" alt="finance" width="400px"/>
+  <img src="/README/finance3.png" alt="finance" width="400px"/>
+  <img src="/README/finance4.png" alt="finance" width="400px"/>
+  <img src="/README/finance5.png" alt="finance" width="400px"/>
+  <img src="/README/finance6.png" alt="finance" width="400px"/>
 </div>
 
  ---
