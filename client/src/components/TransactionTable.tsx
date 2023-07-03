@@ -18,14 +18,14 @@ const TransactionTable: FC = () => {
     useEffect(() => {
         dispatch(fetchFindAllTransactions())
         dispatch(fetchFindAllPaginationTransactions(page, limit))
-    }, [page])
+    }, [page, transactionsPagination])
 
     useMemo(() => {
         setTotalPages(Math.ceil(transactions.length / limit))
     }, [transactions])
 
     const handlePageChange = (selectedItem: { selected: number }) => {
-        setPage(selectedItem.selected + 1)
+        setPage(+selectedItem.selected + 1)
     }
 
     const sendTransactionId = (id: any) => {
@@ -42,7 +42,7 @@ const TransactionTable: FC = () => {
                 nextClassName='text-white py-1 px-2 bg-slate-800 rounded-sm text-xs'
                 disabledClassName='text-white/50 cursor-not-allowed'
                 disabledLinkClassName='text-slate-600 cursor-not-allowed'
-                pageCount={totalPages}
+                pageCount={+totalPages}
                 pageRangeDisplayed={1}
                 marginPagesDisplayed={2}
                 onPageChange={handlePageChange}

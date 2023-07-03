@@ -60,9 +60,9 @@ const TransactionForm: FC = () => {
                             name="category"
                             defaultValue="category"
                             required>
-                            <option value="category" selected disabled>Category</option>
+                            <option className='bg-slate-700' value="category" selected disabled>Category</option>
                             {categories.map((item: any, idx: any) => (
-                                <option key={idx} value={item.id}>{item.title}</option>
+                                <option className='bg-slate-700' key={idx} value={item.id}>{item.title}</option>
                             ))}
                         </select>
                     </label>

@@ -10,11 +10,12 @@ import Chart from "../components/Chart"
 const Transactions: FC = () => {
 
     const dispatch = useAppDispatch()
-    const { totalIncome, totalExpense }: TransactionState = useAppSelector(state => state.transaction)
+    const { totalIncome, totalExpense, transactions }: TransactionState = useAppSelector(state => state.transaction)
 
     useEffect(() => {
         dispatch(fetchIncomeAndExpenseTransactions())
-    }, [])
+    }, [transactions])
+
     return (
         <>
             <div className="grid grid-cols-3 gap-4 mt-4 items-start">
