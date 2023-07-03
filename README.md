@@ -2,7 +2,7 @@
 
 <div align="center">
    
-  <img src="/README/nestjs.png" alt="Logo" width="500px"/>
+  <img src="/README/nestjs.png" alt="Logo" width="600px"/>
    
   <h1 align="center">This is my NodeJS+NestJS+React project.</h1>
   <p style="font-size: 25px;"><strong>FINANCE</strong></p>
