@@ -1,0 +1,36 @@
+<header class="shadow-sm py-2">
+    <div class="container mx-auto flex gap-5 justify-between items-center py-4">
+        <h1 class="text-3xl transform hover:ease-out duration-500 hover:text-green-500 cursor-pointer">
+            <a routerLink="">
+                <fa-icon [icon]="loginIcon"></fa-icon>
+            </a>
+        </h1>
+        <nav *ngIf="isAuth; else isNotAuth" class="justify-end flex">
+            <ul class="flex gap-10 items-center">
+                <li class="text-white/60 transform hover:ease-out duration-500 hover:text-green-500">
+                    <a routerLink="" routerLinkActive="text-green-500 border-b border-green-500"
+                        [routerLinkActiveOptions]="{exact:true}">Home</a>
+                </li>
+                <li class="text-white/60 transform hover:ease-out duration-500 hover:text-green-500">
+                    <a routerLink="profile" routerLinkActive="text-green-500 border-b border-green-500">Profile</a>
+                </li>
+                <li>
+                    <button class="btn btn-red flex text-white gap-2 items-center">
+                        Log Out
+                        <fa-icon [icon]="logoutIcon" class="text-white"></fa-icon>
+                    </button>
+                </li>
+            </ul>
+        </nav>
+        <ng-template #isNotAuth>
+            <ul class="flex items-center gap-4 ml-auto">
+                <li>
+                    <a routerLink="signup">SignUp</a>
+                </li>
+                <li>
+                    <a routerLink="login">Login</a>
+                </li>
+            </ul>
+        </ng-template>
+    </div>
+</header>
