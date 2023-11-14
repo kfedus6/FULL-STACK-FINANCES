@@ -12,11 +12,29 @@ import { TransactionsTableComponent } from "./components/transactions-table/tran
 import { ProfileComponent } from "./pages/profile/profile.component";
 import { LoginComponent } from "./pages/login/login.component";
 import { SignupComponent } from "./pages/signup/signup.component";
+import { ReactiveFormsModule } from "@angular/forms";
+import { AngularToastifyModule, ToastService } from "angular-toastify";
 
 @NgModule({
-    declarations: [AppComponent, HeaderComponent, HomeComponent, CategoriesComponent, TransactionsFormComponent, TransactionsTableComponent, ProfileComponent, LoginComponent, SignupComponent],
-    imports: [BrowserModule, AppRoutingModule, FontAwesomeModule],
-    providers: [],
+    declarations: [
+        AppComponent,
+        HeaderComponent,
+        HomeComponent,
+        CategoriesComponent,
+        TransactionsFormComponent,
+        TransactionsTableComponent,
+        ProfileComponent,
+        LoginComponent,
+        SignupComponent
+    ],
+    imports: [
+        BrowserModule,
+        AppRoutingModule,
+        FontAwesomeModule,
+        ReactiveFormsModule,
+        AngularToastifyModule,
+    ],
+    providers: [ToastService],
     bootstrap: [AppComponent],
 })
 
