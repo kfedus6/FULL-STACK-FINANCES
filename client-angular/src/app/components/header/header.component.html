@@ -1,4 +1,4 @@
-<header class="shadow-sm py-2">
+<header class="shadow-sm py-2 bg-slate-900">
     <div class="container mx-auto flex gap-5 justify-between items-center py-4">
         <h1 class="text-3xl transform hover:ease-out duration-500 hover:text-green-500 cursor-pointer">
             <a routerLink="">
@@ -7,11 +7,11 @@
         </h1>
         <nav *ngIf="isAuth; else isNotAuth" class="justify-end flex">
             <ul class="flex gap-10 items-center">
-                <li class="text-white/60 transform hover:ease-out duration-500 hover:text-green-500">
+                <li class="text-sm font-bold text-white/60 transform hover:ease-out duration-500 hover:text-green-500">
                     <a routerLink="" routerLinkActive="text-green-500 border-b border-green-500"
                         [routerLinkActiveOptions]="{exact:true}">Home</a>
                 </li>
-                <li class="text-white/60 transform hover:ease-out duration-500 hover:text-green-500">
+                <li class="text-sm font-bold text-white/60 transform hover:ease-out duration-500 hover:text-green-500">
                     <a routerLink="profile" routerLinkActive="text-green-500 border-b border-green-500">Profile</a>
                 </li>
                 <li>
@@ -24,11 +24,13 @@
         </nav>
         <ng-template #isNotAuth>
             <ul class="flex items-center gap-4 ml-auto">
-                <li>
-                    <a routerLink="signup">SignUp</a>
+                <li class="text-sm font-bold text-white/60 transform hover:ease-out duration-500 hover:text-green-500">
+                    <a routerLink="signup" routerLinkActive="text-green-500 border-b border-green-500"
+                        [routerLinkActiveOptions]="{exact:true}">Sign Up</a>
                 </li>
-                <li>
-                    <a routerLink="login">Login</a>
+                <span class="cursor-default">/</span>
+                <li class="text-sm font-bold text-white/60 transform hover:ease-out duration-500 hover:text-green-500">
+                    <a routerLink="login" routerLinkActive="text-green-500 border-b border-green-500">Login</a>
                 </li>
             </ul>
         </ng-template>

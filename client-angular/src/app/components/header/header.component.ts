@@ -7,7 +7,7 @@ import { faArrowRightFromBracket, faDollar } from '@fortawesome/free-solid-svg-i
     styleUrl: './header.component.scss'
 })
 export class HeaderComponent {
-    isAuth = true
+    isAuth = false
     logoutIcon = faArrowRightFromBracket
     loginIcon = faDollar
 }
