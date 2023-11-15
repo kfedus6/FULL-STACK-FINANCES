@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { ToastService } from 'angular-toastify';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
     selector: 'app-login',
@@ -10,7 +11,11 @@ import { ToastService } from 'angular-toastify';
 export class LoginComponent {
     userData: FormGroup
 
-    constructor(private _toastService: ToastService) {
+    constructor(
+        private readonly _toastService: ToastService,
+        private readonly authService: AuthService,
+
+    ) {
         this.userData = new FormGroup({
             email: new FormControl('', [Validators.required, Validators.email]),
             password: new FormControl('', [Validators.required, Validators.minLength(6)]),
@@ -19,9 +24,13 @@ export class LoginComponent {
 
     onSubmit() {
         if (this.userData.valid) {
-            console.log(this.userData.value)
+            this.authService.login(this.userData.value)
         } else {
             this._toastService.error('not valid')
         }
+    }
+
+    resetHandler() {
+        this.userData.reset()
     }
 }

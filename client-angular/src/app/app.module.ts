@@ -1,10 +1,13 @@
 import { NgModule } from "@angular/core";
 import { BrowserModule } from "@angular/platform-browser";
+import { ReactiveFormsModule } from "@angular/forms";
+import { AngularToastifyModule, ToastService } from "angular-toastify";
+import { HTTP_INTERCEPTORS, HttpClientModule } from "@angular/common/http";
+import { AppRoutingModule } from "./app-routing.module";
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 import { AppComponent } from "./app.component";
-import { AppRoutingModule } from "./app-routing.module";
 import { HeaderComponent } from "./components/header/header.component";
-import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { HomeComponent } from "./pages/home/home.component";
 import { CategoriesComponent } from "./components/categories/categories.component";
 import { TransactionsFormComponent } from "./components/transactions-form/transactions-form.component";
@@ -12,8 +15,7 @@ import { TransactionsTableComponent } from "./components/transactions-table/tran
 import { ProfileComponent } from "./pages/profile/profile.component";
 import { LoginComponent } from "./pages/login/login.component";
 import { SignupComponent } from "./pages/signup/signup.component";
-import { ReactiveFormsModule } from "@angular/forms";
-import { AngularToastifyModule, ToastService } from "angular-toastify";
+import { AuthInterceptor } from "./interceptors/auth.interceptor";
 
 @NgModule({
     declarations: [
@@ -33,8 +35,16 @@ import { AngularToastifyModule, ToastService } from "angular-toastify";
         FontAwesomeModule,
         ReactiveFormsModule,
         AngularToastifyModule,
+        HttpClientModule
     ],
-    providers: [ToastService],
+    providers: [
+        ToastService,
+        {
+            provide: HTTP_INTERCEPTORS,
+            useClass: AuthInterceptor,
+            multi: true
+        }
+    ],
     bootstrap: [AppComponent],
 })
 

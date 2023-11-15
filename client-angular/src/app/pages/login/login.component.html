@@ -5,7 +5,8 @@
 
     <div class="flex flex-col gap-1">
         <label for="email" class="text-sm">Email</label>
-        <input formControlName="email" required type="email" placeholder="Email" id="email" class="input bg-slate-800">
+        <input formControlName="email" required type="email" placeholder="Email" id="email" value="email"
+            class="input bg-slate-800">
         <div *ngIf="userData.controls['email'].invalid && (userData.controls['email'].dirty || userData.controls['email'].touched)"
             class="text-red-600 text-sm">
             <div *ngIf="userData.controls['email'].hasError('required')">
@@ -34,6 +35,6 @@
 
     <div class="flex items-center gap-4 mt-5 justify-end">
         <button [disabled]="!userData.valid" class="btn btn-green">Confirm</button>
-        <button class="btn btn-red">Cancel</button>
+        <button (click)="resetHandler()" class="btn btn-red">Cancel</button>
     </div>
 </form>

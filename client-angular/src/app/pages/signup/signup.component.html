@@ -34,6 +34,6 @@
 
     <div class="flex items-center gap-4 mt-5 justify-end">
         <button [disabled]="!userData.valid" class="btn btn-green">Confirm</button>
-        <button class="btn btn-red">Cancel</button>
+        <button (click)="resetHandler()" class="btn btn-red">Cancel</button>
     </div>
 </form>
