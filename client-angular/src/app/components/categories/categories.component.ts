@@ -14,6 +14,10 @@ export class CategoriesComponent implements OnInit {
     removeIcon = faRemove
     editIcon = faEdit
 
+    categoryId: number = 0
+    title: string = ''
+    method: 'create' | 'update' = 'create'
+
     constructor(
         public categoryService: CategoryService
     ) {
@@ -28,12 +32,28 @@ export class CategoriesComponent implements OnInit {
 
     onSubmit() {
         if (this.categoryForm.valid) {
-            this.categoryService.create(this.categoryForm.value.title)
-            this.categoryForm.reset()
+            if (this.categoryForm.valid && this.method === 'create') {
+                this.categoryService.create(this.categoryForm.value.title)
+                this.categoryForm.reset()
+            } else {
+                this.updateHandler()
+                this.categoryForm.reset()
+                this.method = 'create'
+            }
         }
     }
 
     deleteHandler(id: number) {
         this.categoryService.delete(id)
+    }
+
+    updateHandler() {
+        this.categoryService.update(this.categoryId, this.categoryForm.value.title)
+    }
+
+    edit(id: number, title: string) {
+        this.categoryId = id
+        this.categoryForm.setValue({ title })
+        this.method = 'update'
     }
 }

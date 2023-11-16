@@ -42,6 +42,7 @@ export class AuthService {
                 tap((res: IUser) => {
                     localStorage.setItem('token', res.token)
                     this.isAuthSig.set(true)
+                    localStorage.setItem('email', res.email)
                 }),
                 catchError((err: any) => {
                     this.handeError(err)
@@ -56,6 +57,7 @@ export class AuthService {
 
     logout() {
         localStorage.removeItem('token')
+        localStorage.removeItem('email')
         this.isAuthSig.set(false)
         this.router.navigate(['/login'])
         this._toastService.success('You logged out!')

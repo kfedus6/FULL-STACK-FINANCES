@@ -5,6 +5,8 @@ import { AngularToastifyModule, ToastService } from "angular-toastify";
 import { HTTP_INTERCEPTORS, HttpClientModule } from "@angular/common/http";
 import { AppRoutingModule } from "./app-routing.module";
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { AuthInterceptor } from "./interceptors/auth.interceptor";
+import { NgxPaginationModule } from "ngx-pagination";
 
 import { AppComponent } from "./app.component";
 import { HeaderComponent } from "./components/header/header.component";
@@ -15,7 +17,6 @@ import { TransactionsTableComponent } from "./components/transactions-table/tran
 import { ProfileComponent } from "./pages/profile/profile.component";
 import { LoginComponent } from "./pages/login/login.component";
 import { SignupComponent } from "./pages/signup/signup.component";
-import { AuthInterceptor } from "./interceptors/auth.interceptor";
 
 @NgModule({
     declarations: [
@@ -35,7 +36,8 @@ import { AuthInterceptor } from "./interceptors/auth.interceptor";
         FontAwesomeModule,
         ReactiveFormsModule,
         AngularToastifyModule,
-        HttpClientModule
+        HttpClientModule,
+        NgxPaginationModule,
     ],
     providers: [
         ToastService,

@@ -1,1 +1,41 @@
-<p>transactions-form works!</p>
+<form [formGroup]="transactionForm" (ngSubmit)="onSubmit()" class="grid gap-2">
+
+    <label class="grid gap-1">
+        <span>Title</span>
+        <input formControlName="title" type="text" class="input bg-slate-800" placeholder="Title..." required>
+    </label>
+
+    <label class="grid gap-1">
+        <span>Amount</span>
+        <input formControlName="amount" type="number" class="input bg-slate-800" placeholder="Amount..." required>
+    </label>
+
+    <label class="grid gap-1">
+        <span>Category</span>
+        <select formControlName="category" defaultValue="category" name="category" required class="input bg-slate-800">
+            <option value="category" selected disabled>Category</option>
+            <option *ngFor="let category of this.categoryService.categoriesSig()" value="{{category.id}}">
+                {{category.title}}
+            </option>
+        </select>
+    </label>
+
+    <div class="flex items-center gap-4">
+        <label class="flex cursor-pointer items-center gap-2">
+            <input formControlName="type" type="radio" value="income" required>
+            <span>Income</span>
+        </label>
+
+        <label class="flex cursor-pointer items-center gap-2">
+            <input formControlName="type" class="form-radio text-blue-600" type="radio" value="expense" required>
+            <span>Expense</span>
+        </label>
+    </div>
+
+    <div class="flex">
+        <button [disabled]="!this.transactionForm.valid" type="submit" class="btn btn-green">
+            Submit
+        </button>
+    </div>
+
+</form>

@@ -1,7 +1,6 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable, signal } from "@angular/core";
 import { ToastService } from "angular-toastify";
-import { API_URL } from "../constants/constants";
 import { ICategory } from "../types/category.interface";
 
 @Injectable({
@@ -40,6 +39,16 @@ export class CategoryService {
                     categories.filter((category) => category.id !== id)
                 )
                 this._toastService.warn('You have deleted the category!')
+            })
+    }
+
+    update(id: number, title: string) {
+        return this.http
+            .patch(`categories/category/${id}`, { title })
+            .subscribe(() => {
+                this.categoriesSig.update((categories) =>
+                    categories.map((ctg) => ctg.id === id ? { ...ctg, title } : ctg))
+                this._toastService.success('You have updated a category!')
             })
     }
 }
